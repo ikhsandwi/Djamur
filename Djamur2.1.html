@@ -1,0 +1,430 @@
+<html>
+  <head><title> D'jamur</title><br/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <style>
+  .water {
+    position: fixed;
+    left: 360px;
+    top: 270px;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: white;
+  background-color: blue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  }
+  .water:active{background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  .water:hover {background: #0b7dda;}
+
+  .wateroff {
+    position: fixed;
+    left: 550px;
+    top: 270px;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: white;
+  background-color: blue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  }
+  .wateroff:active{background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  .wateroff:hover {background: #0b7dda;}
+
+  .light {
+    position: fixed;
+    left: 360px;
+    top: 390px;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  background-color: yellow;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  }
+  .light:active{background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  .light:hover {background: orange;}
+
+  .lightoff {
+    position: fixed;
+    left: 550px;
+    top: 390px;
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  background-color: yellow;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  }
+  .lightoff:active{background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  .lightoff:hover {background: orange;}
+
+
+.refresh {
+    position: relative;
+    left: 650px;
+    top: 7px;
+    background-color: #4CAF50;
+    border: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.refresh:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.refresh:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+  img{
+    position: fixed;
+    left: 200px;
+    top: 50px;
+    z-index: -1;
+  }
+  h1
+  {
+    
+     color: white;
+     text-align: center;
+  }
+  h5
+  {
+    position: fixed;
+    left: 340px;
+    top: 150px;
+    width: 70px;
+    padding: 10px;
+    border: 5px;
+    margin: 0;
+    color: yellow;
+    text-align: center;
+  }
+  h2
+  {
+    position: fixed;
+    left: 350px;
+    top: 100px;
+     width: 300px;
+    padding: 10px;
+    border: 10px;
+    margin: 0;
+     color: white;
+     text-align: left;
+  }
+  w
+  {
+    position: fixed;
+    left: 360px;
+    top: 200px;
+     color: white;
+     text-align: center;
+     font-size: 30px;
+     font-weight: bold;
+  }
+  l
+  {
+     position: fixed;
+     left: 360px;
+     top: 350px;
+     color: white;
+     text-align: center;
+     font-size: 30px;
+     font-weight: bold;
+  }
+  tem
+  {
+    position: fixed;
+    left: 360px;
+    top: 450px;
+     color: white;
+     text-align: center;
+     font-size: 20px;
+     font-weight: bold;
+  }
+  hum
+  {
+    position: fixed;
+    left: 360px;
+    top: 500px;
+     color: white;
+     text-align: center;
+     font-size: 20px;
+     font-weight: bold;
+  }
+
+  </style>
+  <body background="http://sebamban.files.wordpress.com/2010/07/jamur4.jpg">
+    	<h1>D'JAMUR (Control & Monitoring Mushroom)</h1>
+      <img src="https://files.slack.com/files-pri/T504FSDT4-F5X155FKM/d_j_amur.png" width="150" height="150">
+      <h2>Status Device : <label id="device"></label></h2>
+      <h5>ping : <label id="ping"> </label> ms</h5>
+      <button class="refresh" onclick="dht22()">Refresh</button>
+      <w>Watering: <label id="water"></label></w>
+          <button class="water" onclick="OnWater()">ON Water</button> 
+          <button class="wateroff" onclick="OffWater()">OFF Water</button>
+          <button class="light" onclick="OnFan()">ON Light</button> 
+          <button class="lightoff" onclick="OffFan()">OFF Light</button>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <l>Light:<label id="fan"></label></l>
+          <tem>Temperature :<label id="temp"></label> C </tem>
+          <hum>Humidity :<label id="hum"></label> %</hum>
+  </body>
+        
+        <script type="text/javascript">
+        
+              function cekstatus() {
+                  $.ajax({
+                  url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/status',
+                  type : 'GET',
+                  headers :{
+                    'content-type':'application/json',
+                    'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                  },
+                  success:function(response)
+                  {
+                   var stat=response.status;
+                   var speed=response.result;
+                   var ping=speed*10000;
+                   if(stat==1)
+                    {
+                      $('#device').html('ONLINE');
+                      $('#ping').html(ping)
+                    }
+                   else
+                    {
+                      $('#device').html('OFFLINE'); 
+                    }
+                  }
+                });
+              };
+              function dht22(){
+                 $.ajax({
+                  url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/dht22/data',
+                  type: 'GET',
+                  headers: {
+                    'content-type':'application/json',
+                    'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                    },
+
+                  success:function(response)
+                  {
+                    alert(response.messages);
+                    //$('#LED').val(response);
+                    $('#temp').html(JSON.stringify(response.data.result.temperature)); 
+                    $('#hum').html(JSON.stringify(response.data.result.humidity));
+                  }
+
+                });
+              }
+                  
+              function ifttt(){
+                 $.ajax({
+                  url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/dht22/data',
+                  type: 'GET',
+                  headers: {
+                    'content-type':'application/json',
+                    'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                    },
+
+                  success:function(response)
+                  {
+                    
+                    var temp=response.data.result.temperature;
+                    var hum=response.data.result.humidity;
+                    if (temp>=27)
+                    {
+                      $.ajax({
+                        url : 'https://maker.ifttt.com/trigger/suhu_diatas_27/with/key/czawkMx3vJ849lweYtArE9',
+                        method : 'POST'
+                      });
+                    }
+                    if(temp<=24)
+                    {
+                      $.ajax({
+                        url : 'https://maker.ifttt.com/trigger/suhu_dibawah_24/with/key/czawkMx3vJ849lweYtArE9',
+                        method : 'POST'
+                      });
+                    }
+                    if(hum>=90)
+                    {
+                      $.ajax({
+                        url : 'https://maker.ifttt.com/trigger/kelembaban_lebih/with/key/czawkMx3vJ849lweYtArE9',
+                        method : 'POST'
+                      });
+                    }
+                    if(hum<=70)
+                    {
+                      $.ajax({
+                        url : 'https://maker.ifttt.com/trigger/kelembaban_kurang/with/key/czawkMx3vJ849lweYtArE9',
+                        method : 'POST'
+                      });
+                    }
+                  }
+                });
+              }
+              function mode1(){
+                  $.ajax({
+                    url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/gpio/data',
+                    type: 'GET',
+                    headers: {
+                        'content-type':'application/json',
+                        'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                    },
+                    success:function(response)
+                    {
+                      var hasil1 = response.data.result[4];
+                      if(hasil1=="1")
+                      {
+                        $('#water').html("OFF");
+                      }
+                      else if(hasil1=="0")
+                      {
+                        $('#water').html("ON");
+                      }
+
+                      }
+                  });
+              }
+              
+              function mode2(){
+                $.ajax({
+                  url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/gpio/data',
+                  type: 'GET',
+                  headers: 
+                    {
+                      'content-type':'application/json',
+                      'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                    },
+                  success:function(response)
+                  {
+                    var hasil2 = response.data.result[5];
+                    if(hasil2=="1")
+                    {
+                      $('#fan').html("OFF");
+                    }
+                    if(hasil2=="0")
+                    {
+                      $('#fan').html("ON");
+                    }
+
+                    }
+                });
+              }
+
+              function OnWater(){
+                  $.ajax({
+                    url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/gpio/control',
+                    type: 'POST',
+                    headers: {
+                      'content-type':'application/json',
+                      'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                    },
+                    data: JSON.stringify({
+                        "controls": {"4":0}
+                      })
+                  });
+                }
+                
+              function OnFan(){
+                  $.ajax({
+                    url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/gpio/control',
+                    type: 'POST',
+                    headers: {
+                      'content-type':'application/json',
+                      'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                    },
+                    data: JSON.stringify({
+                        "controls": {"5":0}
+                      })
+                  });
+              }
+
+              function OffWater(){
+                $.ajax({
+                  url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/gpio/control',
+                  type: 'POST',
+                  headers: {
+                    'content-type':'application/json',
+                    'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                  },
+                  data: JSON.stringify({
+                      "controls": {"4":1}
+                    })
+                });
+              }
+
+              function OffFan(){
+                $.ajax({
+                  url : 'http://api.arkademy.com:3000/v0/arkana/device/IO/avatar/gpio/control',
+                  type: 'POST',
+                  headers: {
+                    'content-type':'application/json',
+                    'authorization':'Bearer MTQyOTQwMjk1MC4wMDA0ODM1Og=='
+                  },
+                  data: JSON.stringify({
+                      "controls": {"5":1}
+                    })
+                });
+              }
+
+              //setInterval(dht22,5000);
+              setInterval(cekstatus,5000);
+              setInterval(ifttt, 60000);
+              setInterval(mode1, 3000);
+              setInterval(mode2, 3000);
+              
+        </script>
+    
+</html>
+
